@@ -1,5 +1,6 @@
 package com.oocl;
 
+import com.oocl.exception.CarAlreadyParkedException;
 import com.oocl.exception.ParkingLotFullException;
 
 import java.util.ArrayList;
@@ -13,6 +14,9 @@ public class ParkingLot {
     public void park(Car car) {
         if (isFull()) {
             throw new ParkingLotFullException();
+        }
+        if (contains(car)) {
+            throw new CarAlreadyParkedException();
         }
         carList.add(car);
     }

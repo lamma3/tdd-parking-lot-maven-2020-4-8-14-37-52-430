@@ -1,5 +1,6 @@
 package com.oocl;
 
+import com.oocl.exception.CarAlreadyParkedException;
 import com.oocl.exception.ParkingLotFullException;
 
 public class ParkingBoy {
@@ -14,7 +15,7 @@ public class ParkingBoy {
         try {
             parkingLot.park(car);
             return new ParkingTicket(car);
-        } catch (ParkingLotFullException e) {
+        } catch (ParkingLotFullException | CarAlreadyParkedException e) {
             return null;
         }
     }
