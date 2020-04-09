@@ -1,6 +1,6 @@
 package com.oocl;
 
-import com.oocl.exception.MissingPackingTicketException;
+import com.oocl.exception.MissingParkingTicketException;
 import com.oocl.exception.ParkingLotFullException;
 import com.oocl.exception.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Assertions;
@@ -35,7 +35,7 @@ public class ParkingBoyTest {
 
     @Test
     public void should_throw_exception_when_no_ticket() {
-        MissingPackingTicketException exception = Assertions.assertThrows(MissingPackingTicketException.class,
+        MissingParkingTicketException exception = Assertions.assertThrows(MissingParkingTicketException.class,
                 () -> parkingBoy.fetch(null));
         Assertions.assertEquals("Please provide your parking ticket.", exception.getMessage());
     }

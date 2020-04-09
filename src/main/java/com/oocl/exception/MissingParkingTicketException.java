@@ -1,10 +1,10 @@
 package com.oocl.exception;
 
-public class MissingPackingTicketException extends RuntimeException {
+public class MissingParkingTicketException extends RuntimeException {
 
     private static final String MESSAGE = "Please provide your parking ticket.";
 
-    public MissingPackingTicketException() {
+    public MissingParkingTicketException() {
         super(MESSAGE);
     }
 }
