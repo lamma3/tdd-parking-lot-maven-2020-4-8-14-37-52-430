@@ -34,4 +34,8 @@ public class ParkingLot {
     public int getEmptyPosition() {
         return capacity - carList.size();
     }
+
+    public double getAvailableRate() {
+        return (double) getEmptyPosition() / capacity;
+    }
 }

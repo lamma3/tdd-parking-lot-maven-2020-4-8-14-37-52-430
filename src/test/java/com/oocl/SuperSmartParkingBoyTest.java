@@ -18,6 +18,6 @@ public class SuperSmartParkingBoyTest {
         parkingBoy.park(car2);
 
         Assertions.assertTrue(parkingLot1.contains(car1));
-        Assertions.assertFalse(parkingLot2.contains(car2));
+        Assertions.assertTrue(parkingLot2.contains(car2));
     }
 }
