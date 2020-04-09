@@ -10,4 +10,8 @@ public class ParkingLot {
     public void park(Car car) {
         carList.add(car);
     }
+
+    public void take(Car car) {
+        carList.remove(car);
+    }
 }

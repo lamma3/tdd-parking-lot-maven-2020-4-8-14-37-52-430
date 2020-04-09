@@ -1,12 +1,8 @@
 package com.oocl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ParkingBoy {
 
     private final ParkingLot parkingLot;
-    private List<ParkingTicket> parkingTicketList = new ArrayList<>();
 
     public ParkingBoy(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
@@ -14,12 +10,12 @@ public class ParkingBoy {
 
     public ParkingTicket park(Car car) {
         parkingLot.park(car);
-        ParkingTicket parkingTicket = new ParkingTicket(car);
-        parkingTicketList.add(parkingTicket);
-        return parkingTicket;
+        return new ParkingTicket(car);
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
-        return null;
+        Car car = parkingTicket.getCar();
+        parkingLot.take(car);
+        return car;
     }
 }
