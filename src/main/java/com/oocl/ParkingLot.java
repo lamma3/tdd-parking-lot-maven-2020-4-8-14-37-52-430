@@ -30,4 +30,8 @@ public class ParkingLot {
     public boolean contains(Car car) {
         return carList.contains(car);
     }
+
+    public int getEmptyPosition() {
+        return capacity - carList.size();
+    }
 }

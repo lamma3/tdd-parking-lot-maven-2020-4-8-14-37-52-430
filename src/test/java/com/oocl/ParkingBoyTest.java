@@ -3,6 +3,7 @@ package com.oocl;
 import com.oocl.exception.MissingParkingTicketException;
 import com.oocl.exception.ParkingLotFullException;
 import com.oocl.exception.UnrecognizedParkingTicketException;
+import com.oocl.parkingboy.ParkingBoy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

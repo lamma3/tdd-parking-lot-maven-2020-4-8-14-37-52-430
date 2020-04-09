@@ -1,5 +1,8 @@
-package com.oocl;
+package com.oocl.parkingboy;
 
+import com.oocl.Car;
+import com.oocl.ParkingLot;
+import com.oocl.ParkingTicket;
 import com.oocl.exception.MissingParkingTicketException;
 import com.oocl.exception.ParkingLotFullException;
 import com.oocl.exception.UnrecognizedParkingTicketException;
@@ -15,11 +18,15 @@ public class ParkingBoy {
         this.parkingLotList = Arrays.asList(parkingLotArray);
     }
 
+    List<ParkingLot> getParkingLotList() {
+        return parkingLotList;
+    }
+
     public ParkingTicket park(Car car) {
         if (findParkingLotOf(car) != null) {
             return null;
         }
-        ParkingLot parkingLot = findFirstAvailableParkingLot();
+        ParkingLot parkingLot = findAvailableParkingLot();
         if (parkingLot == null) {
             throw new ParkingLotFullException();
         }
@@ -34,7 +41,8 @@ public class ParkingBoy {
                 .orElse(null);
     }
 
-    private ParkingLot findFirstAvailableParkingLot() {
+    ParkingLot findAvailableParkingLot() {
+        // return first parking lot which is not full
         return parkingLotList.stream()
                 .filter(parkingLot -> !parkingLot.isFull())
                 .findFirst()
