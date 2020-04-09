@@ -18,4 +18,8 @@ public class ParkingBoy {
         parkingTicketList.add(parkingTicket);
         return parkingTicket;
     }
+
+    public Car fetch(ParkingTicket parkingTicket) {
+        return null;
+    }
 }
