@@ -1,8 +1,8 @@
 package com.oocl;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ParkingBoyTest {
 
@@ -10,7 +10,7 @@ public class ParkingBoyTest {
 
     ParkingBoy parkingBoy;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         parkingBoy = new ParkingBoy(new ParkingLot());
     }
@@ -19,7 +19,7 @@ public class ParkingBoyTest {
     public void should_return_ticket_when_park_car() {
         Car car = new Car();
         ParkingTicket parkingTicket = parkingBoy.park(car);
-        Assert.assertEquals(car, parkingTicket.getCar());
+        Assertions.assertEquals(car, parkingTicket.getCar());
     }
 
     @Test
@@ -27,13 +27,13 @@ public class ParkingBoyTest {
         Car car = new Car();
         ParkingTicket parkingTicket = parkingBoy.park(car);
         Car result = parkingBoy.fetch(parkingTicket);
-        Assert.assertEquals(car, result);
+        Assertions.assertEquals(car, result);
     }
 
     @Test
     public void should_return_null_when_no_ticket() {
         Car result = parkingBoy.fetch(null);
-        Assert.assertNull(result);
+        Assertions.assertNull(result);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class ParkingBoyTest {
         Car car = new Car();
         ParkingTicket parkingTicket = new ParkingTicket(car);
         Car result = parkingBoy.fetch(parkingTicket);
-        Assert.assertNull(result);
+        Assertions.assertNull(result);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ParkingBoyTest {
         ParkingTicket parkingTicket = parkingBoy.park(car);
         parkingBoy.fetch(parkingTicket);
         Car result = parkingBoy.fetch(parkingTicket);
-        Assert.assertNull(result);
+        Assertions.assertNull(result);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class ParkingBoyTest {
         }
         Car car = new Car();
         ParkingTicket parkingTicket = parkingBoy.park(car);
-        Assert.assertNull(parkingTicket);
+        Assertions.assertNull(parkingTicket);
     }
 
     @Test
@@ -69,6 +69,6 @@ public class ParkingBoyTest {
         Car car = new Car();
         parkingBoy.park(car);
         ParkingTicket parkingTicket = parkingBoy.park(car);
-        Assert.assertNull(parkingTicket);
+        Assertions.assertNull(parkingTicket);
     }
 }
