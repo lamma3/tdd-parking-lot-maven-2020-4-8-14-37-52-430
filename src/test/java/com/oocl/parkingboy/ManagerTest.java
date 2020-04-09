@@ -55,4 +55,15 @@ public class ManagerTest {
         Car result = manager.fetch(parkingTicket, parkingBoy);
         Assertions.assertNull(result);
     }
+
+    @Test
+    public void should_able_to_park_and_fetch() {
+        ParkingLot parkingLot = new ParkingLot();
+        Manager manager = new Manager(parkingLot);
+
+        Car car = new Car();
+        ParkingTicket parkingTicket = manager.park(car);
+        Car result = manager.fetch(parkingTicket);
+        Assertions.assertEquals(car, result);
+    }
 }
