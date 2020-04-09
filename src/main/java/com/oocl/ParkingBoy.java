@@ -2,6 +2,7 @@ package com.oocl;
 
 import com.oocl.exception.CarAlreadyParkedException;
 import com.oocl.exception.ParkingLotFullException;
+import com.oocl.exception.UnrecognizedParkingTicketException;
 
 public class ParkingBoy {
 
@@ -26,7 +27,7 @@ public class ParkingBoy {
         }
         Car car = parkingTicket.getCar();
         if (!parkingLot.contains(car)) {
-            return null;
+            throw new UnrecognizedParkingTicketException();
         }
         parkingLot.take(car);
         return car;
