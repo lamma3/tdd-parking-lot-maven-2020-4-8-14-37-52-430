@@ -1,12 +1,13 @@
 package com.oocl;
 
 import com.oocl.exception.CarAlreadyParkedException;
-import com.oocl.exception.ParkingLotFullException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 public class ParkingBoyTest {
+
+    private static final int PARKING_LOT_CAPACITY = 10;
 
     @Test
     public void should_return_ticket_when_park_car() {
@@ -58,11 +59,11 @@ public class ParkingBoyTest {
 
     @Test
     public void should_return_null_when_car_park_full() {
-        ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
-        Mockito.doThrow(new ParkingLotFullException())
-                .when(parkingLot).park(Mockito.any());
-
-        ParkingBoy packingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy packingBoy = new ParkingBoy(new ParkingLot());
+        for (int i = 0; i < PARKING_LOT_CAPACITY; i++) {
+            Car car = new Car();
+            packingBoy.park(car);
+        }
         Car car = new Car();
         ParkingTicket parkingTicket = packingBoy.park(car);
         Assert.assertNull(parkingTicket);
