@@ -3,9 +3,11 @@ package com.oocl.parkingboy;
 import com.oocl.Car;
 import com.oocl.ParkingLot;
 import com.oocl.ParkingTicket;
+import com.oocl.exception.ParkingLotFullException;
 import com.oocl.exception.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class ManagerTest {
 
@@ -78,5 +80,19 @@ public class ManagerTest {
 
         Assertions.assertThrows(UnrecognizedParkingTicketException.class,
                 () -> manager.fetch(parkingTicket));
+    }
+
+    @Test
+    public void should_throw_exception_when_parking_boy_park_throw_exception() {
+        ParkingBoy parkingBoy = Mockito.mock(ParkingBoy.class);
+        Mockito.doThrow(new ParkingLotFullException())
+                .when(parkingBoy).park(Mockito.any());
+
+        Manager manager = new Manager(new ParkingLot());
+        manager.add(parkingBoy);
+
+        ParkingLotFullException exception = Assertions.assertThrows(ParkingLotFullException.class,
+                () -> manager.park(new Car(), parkingBoy));
+        Assertions.assertEquals("Not enough position.", exception.getMessage());
     }
 }
