@@ -25,4 +25,8 @@ public class Manager extends ParkingBoy {
         }
         return parkingBoy.park(car);
     }
+
+    public Car fetch(ParkingTicket parkingTicket, ParkingBoy parkingBoy) {
+        return null;
+    }
 }
