@@ -14,7 +14,7 @@ public class SmartParkingBoy extends ParkingBoy {
     ParkingLot findAvailableParkingLot() {
         // return first parking lot witch is not full and with the largest number of empty space
         return this.getParkingLotList().stream()
-                .filter(parkingLot -> !parkingLot.isFull())
+                .filter(parkingLot -> parkingLot.getAvailableRate() > 0)
                 .max(Comparator.comparing(ParkingLot::getEmptyPosition))
                 .orElse(null);
     }

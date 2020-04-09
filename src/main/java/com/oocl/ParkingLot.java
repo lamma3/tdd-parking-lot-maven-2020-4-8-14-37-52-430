@@ -19,10 +19,6 @@ public class ParkingLot {
         carList.add(car);
     }
 
-    public boolean isFull() {
-        return carList.size() >= capacity;
-    }
-
     public void take(Car car) {
         carList.remove(car);
     }

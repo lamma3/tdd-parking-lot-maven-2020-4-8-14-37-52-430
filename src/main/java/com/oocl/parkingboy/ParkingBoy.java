@@ -44,7 +44,7 @@ public class ParkingBoy {
     ParkingLot findAvailableParkingLot() {
         // return first parking lot which is not full
         return parkingLotList.stream()
-                .filter(parkingLot -> !parkingLot.isFull())
+                .filter(parkingLot -> parkingLot.getAvailableRate() > 0)
                 .findFirst()
                 .orElse(null);
     }
