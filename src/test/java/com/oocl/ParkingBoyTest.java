@@ -31,4 +31,14 @@ public class ParkingBoyTest {
         Car result = packingBoy.fetch(null);
         Assert.assertNull(result);
     }
+
+    @Test
+    public void should_return_null_when_ticket_is_wrong() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy packingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+        ParkingTicket parkingTicket = new ParkingTicket(car);
+        Car result = packingBoy.fetch(parkingTicket);
+        Assert.assertNull(result);
+    }
 }
