@@ -19,4 +19,15 @@ public class ManagerTest {
         ParkingTicket parkingTicket = manager.park(car, parkingBoy);
         Assertions.assertNotNull(parkingTicket);
     }
+
+    @Test
+    public void should_not_able_to_specify_parking_boy_to_park_when_parking_boy_not_in_list() {
+        ParkingLot parkingLot = new ParkingLot();
+        Manager manager = new Manager(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        Car car = new Car();
+        ParkingTicket parkingTicket = manager.park(car, parkingBoy);
+        Assertions.assertNull(parkingTicket);
+    }
 }
