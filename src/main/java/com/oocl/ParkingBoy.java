@@ -1,5 +1,7 @@
 package com.oocl;
 
+import com.oocl.exception.ParkingLotFullException;
+
 public class ParkingBoy {
 
     private final ParkingLot parkingLot;
@@ -9,8 +11,12 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        parkingLot.park(car);
-        return new ParkingTicket(car);
+        try {
+            parkingLot.park(car);
+            return new ParkingTicket(car);
+        } catch (ParkingLotFullException e) {
+            return null;
+        }
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
