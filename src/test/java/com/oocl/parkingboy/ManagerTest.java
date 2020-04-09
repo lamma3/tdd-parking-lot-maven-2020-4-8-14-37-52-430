@@ -100,13 +100,13 @@ public class ManagerTest {
     public void should_throw_exception_when_parking_boy_fetch_throw_exception() {
         ParkingBoy parkingBoy = Mockito.mock(ParkingBoy.class);
         Mockito.doThrow(new UnrecognizedParkingTicketException())
-                .when(parkingBoy).park(Mockito.any());
+                .when(parkingBoy).fetch(Mockito.any());
 
         Manager manager = new Manager(new ParkingLot());
         manager.add(parkingBoy);
 
         UnrecognizedParkingTicketException exception = Assertions.assertThrows(UnrecognizedParkingTicketException.class,
-                () -> manager.park(new Car(), parkingBoy));
+                () -> manager.fetch(new ParkingTicket(), parkingBoy));
         Assertions.assertEquals("Unrecognized parking ticket.", exception.getMessage());
     }
 }
