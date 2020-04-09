@@ -1,9 +1,7 @@
 package com.oocl;
 
-import com.oocl.exception.CarAlreadyParkedException;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 public class ParkingBoyTest {
 
@@ -71,12 +69,9 @@ public class ParkingBoyTest {
 
     @Test
     public void should_return_null_when_car_already_parked() {
-        ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
-        Mockito.doThrow(new CarAlreadyParkedException())
-                .when(parkingLot).park(Mockito.any());
-
-        ParkingBoy packingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy packingBoy = new ParkingBoy(new ParkingLot());
         Car car = new Car();
+        packingBoy.park(car);
         ParkingTicket parkingTicket = packingBoy.park(car);
         Assert.assertNull(parkingTicket);
     }
