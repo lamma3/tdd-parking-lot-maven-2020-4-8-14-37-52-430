@@ -1,5 +1,6 @@
 package com.oocl;
 
+import com.oocl.exception.CarAlreadyParkedException;
 import com.oocl.exception.ParkingLotFullException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -70,8 +71,8 @@ public class ParkingBoyTest {
     @Test
     public void should_return_null_when_car_already_parked() {
         ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
-        Mockito.when(parkingLot.contains(Mockito.any()))
-                .thenReturn(true);
+        Mockito.doThrow(new CarAlreadyParkedException())
+                .when(parkingLot).park(Mockito.any());
 
         ParkingBoy packingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
