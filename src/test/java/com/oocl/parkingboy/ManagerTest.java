@@ -3,6 +3,7 @@ package com.oocl.parkingboy;
 import com.oocl.Car;
 import com.oocl.ParkingLot;
 import com.oocl.ParkingTicket;
+import com.oocl.exception.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -65,5 +66,17 @@ public class ManagerTest {
         ParkingTicket parkingTicket = manager.park(car);
         Car result = manager.fetch(parkingTicket);
         Assertions.assertEquals(car, result);
+    }
+
+    @Test
+    public void should_not_able_to_fetch_when_parking_lot_is_not_managed() {
+        Manager manager = new Manager(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
+
+        Car car = new Car();
+        ParkingTicket parkingTicket = parkingBoy.park(car);
+
+        Assertions.assertThrows(UnrecognizedParkingTicketException.class,
+                () -> manager.fetch(parkingTicket));
     }
 }
