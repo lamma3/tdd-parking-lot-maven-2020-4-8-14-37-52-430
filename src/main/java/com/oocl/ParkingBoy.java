@@ -14,6 +14,9 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
+        if (parkingTicket == null) {
+            return null;
+        }
         Car car = parkingTicket.getCar();
         parkingLot.take(car);
         return car;
