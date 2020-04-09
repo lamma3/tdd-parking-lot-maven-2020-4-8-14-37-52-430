@@ -1,7 +1,9 @@
 package com.oocl;
 
+import com.oocl.exception.ParkingLotFullException;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 public class ParkingBoyTest {
 
@@ -51,5 +53,17 @@ public class ParkingBoyTest {
         packingBoy.fetch(parkingTicket);
         Car result = packingBoy.fetch(parkingTicket);
         Assert.assertNull(result);
+    }
+
+    @Test
+    public void should_return_null_when_car_park_full() {
+        ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
+        Mockito.doThrow(new ParkingLotFullException())
+                .when(parkingLot).park(Mockito.any());
+
+        ParkingBoy packingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+        ParkingTicket parkingTicket = packingBoy.park(car);
+        Assert.assertNull(parkingTicket);
     }
 }
