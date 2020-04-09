@@ -27,6 +27,9 @@ public class Manager extends ParkingBoy {
     }
 
     public Car fetch(ParkingTicket parkingTicket, ParkingBoy parkingBoy) {
-        return null;
+        if (!managementList.contains(parkingBoy)) {
+            return null;
+        }
+        return parkingBoy.fetch(parkingTicket);
     }
 }

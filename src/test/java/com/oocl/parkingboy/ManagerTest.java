@@ -3,7 +3,6 @@ package com.oocl.parkingboy;
 import com.oocl.Car;
 import com.oocl.ParkingLot;
 import com.oocl.ParkingTicket;
-import com.oocl.exception.MissingParkingTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +52,7 @@ public class ManagerTest {
 
         Car car = new Car();
         ParkingTicket parkingTicket = manager.park(car, parkingBoy);
-        Assertions.assertThrows(MissingParkingTicketException.class,
-                () -> manager.fetch(parkingTicket, parkingBoy));
+        Car result = manager.fetch(parkingTicket, parkingBoy);
+        Assertions.assertNull(result);
     }
 }
