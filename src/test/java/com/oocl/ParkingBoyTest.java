@@ -1,5 +1,6 @@
 package com.oocl;
 
+import com.oocl.exception.MissingPackingTicketException;
 import com.oocl.exception.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,9 +33,10 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_return_null_when_no_ticket() {
-        Car result = parkingBoy.fetch(null);
-        Assertions.assertNull(result);
+    public void should_throw_exception_when_no_ticket() {
+        MissingPackingTicketException exception = Assertions.assertThrows(MissingPackingTicketException.class,
+                () -> parkingBoy.fetch(null));
+        Assertions.assertEquals("Please provide your parking ticket.", exception.getMessage());
     }
 
     @Test
