@@ -1,6 +1,7 @@
 package com.oocl;
 
 import com.oocl.exception.MissingPackingTicketException;
+import com.oocl.exception.ParkingLotFullException;
 import com.oocl.exception.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,14 +60,15 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_return_null_when_car_park_full() {
+    public void should_throw_exception_when_car_park_full() {
         for (int i = 0; i < PARKING_LOT_CAPACITY; i++) {
             Car car = new Car();
             parkingBoy.park(car);
         }
         Car car = new Car();
-        ParkingTicket parkingTicket = parkingBoy.park(car);
-        Assertions.assertNull(parkingTicket);
+        ParkingLotFullException exception = Assertions.assertThrows(ParkingLotFullException.class,
+                () -> parkingBoy.park(car));
+        Assertions.assertEquals("Not enough position.", exception.getMessage());
     }
 
     @Test
