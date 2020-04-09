@@ -1,24 +1,26 @@
 package com.oocl;
 
-import com.oocl.exception.CarAlreadyParkedException;
 import com.oocl.exception.MissingParkingTicketException;
+import com.oocl.exception.ParkingLotFullException;
 import com.oocl.exception.UnrecognizedParkingTicketException;
 
 public class ParkingBoy {
 
-    private final ParkingLot parkingLot;
+    private ParkingLot parkingLot;
 
     public ParkingBoy(ParkingLot... parkingLotArray) {
         this.parkingLot = parkingLotArray[0];
     }
 
     public ParkingTicket park(Car car) {
-        try {
-            parkingLot.park(car);
-            return new ParkingTicket(car);
-        } catch (CarAlreadyParkedException e) {
+        if (parkingLot.contains(car)) {
             return null;
         }
+        if (parkingLot.isFull()) {
+            throw new ParkingLotFullException();
+        }
+        parkingLot.park(car);
+        return new ParkingTicket(car);
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
