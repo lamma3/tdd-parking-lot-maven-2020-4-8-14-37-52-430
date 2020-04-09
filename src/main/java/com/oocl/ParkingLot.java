@@ -16,18 +16,18 @@ public class ParkingLot {
     }
 
     public void park(Car car) {
-        this.carList.add(car);
+        carList.add(car);
     }
 
     public boolean isFull() {
-        return this.carList.size() >= this.capacity;
+        return carList.size() >= capacity;
     }
 
     public void take(Car car) {
-        this.carList.remove(car);
+        carList.remove(car);
     }
 
     public boolean contains(Car car) {
-        return this.carList.contains(car);
+        return carList.contains(car);
     }
 }

@@ -2,13 +2,13 @@ package com.oocl;
 
 public class ParkingTicket {
 
-    private final Car car;
+    private Car car;
 
     public ParkingTicket(Car car) {
         this.car = car;
     }
 
     public Car getCar() {
-        return this.car;
+        return car;
     }
 }
