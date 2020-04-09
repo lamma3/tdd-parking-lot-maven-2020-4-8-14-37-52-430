@@ -18,6 +18,9 @@ public class ParkingBoy {
             return null;
         }
         Car car = parkingTicket.getCar();
+        if (!parkingLot.contains(car)) {
+            return null;
+        }
         parkingLot.take(car);
         return car;
     }

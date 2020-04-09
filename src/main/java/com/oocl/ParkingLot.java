@@ -14,4 +14,8 @@ public class ParkingLot {
     public void take(Car car) {
         carList.remove(car);
     }
+
+    public boolean contains(Car car) {
+        return carList.contains(car);
+    }
 }
