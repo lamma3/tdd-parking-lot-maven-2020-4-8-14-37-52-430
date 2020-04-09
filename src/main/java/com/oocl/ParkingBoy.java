@@ -8,8 +8,8 @@ public class ParkingBoy {
 
     private final ParkingLot parkingLot;
 
-    public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+    public ParkingBoy(ParkingLot... parkingLotArray) {
+        this.parkingLot = parkingLotArray[0];
     }
 
     public ParkingTicket park(Car car) {

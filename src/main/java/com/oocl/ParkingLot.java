@@ -11,6 +11,14 @@ public class ParkingLot {
     private static final int CAPACITY = 10;
     List<Car> carList = new ArrayList<>();
 
+    public ParkingLot() {
+
+    }
+
+    public ParkingLot(int capacity) {
+
+    }
+
     public void park(Car car) {
         if (isFull()) {
             throw new ParkingLotFullException();
