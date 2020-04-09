@@ -1,12 +1,12 @@
 package com.oocl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ParkingLot {
 
     private Integer capacity = 10;
-    List<Car> carList = new ArrayList<>();
+    Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<>();
 
     public ParkingLot() {
     }
@@ -15,20 +15,24 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
-    public void park(Car car) {
-        carList.add(car);
+    public ParkingTicket park(Car car) {
+        ParkingTicket parkingTicket = new ParkingTicket();
+        parkingTicketCarMap.put(parkingTicket, car);
+        return parkingTicket;
     }
 
-    public void take(Car car) {
-        carList.remove(car);
+    public Car take(ParkingTicket parkingTicket) {
+        Car car = parkingTicketCarMap.get(parkingTicket);
+        parkingTicketCarMap.remove(parkingTicket);
+        return car;
     }
 
     public boolean contains(Car car) {
-        return carList.contains(car);
+        return parkingTicketCarMap.containsValue(car);
     }
 
     public int getEmptyPosition() {
-        return capacity - carList.size();
+        return capacity - parkingTicketCarMap.size();
     }
 
     public double getAvailableRate() {

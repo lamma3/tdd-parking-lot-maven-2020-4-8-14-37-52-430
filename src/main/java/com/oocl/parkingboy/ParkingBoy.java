@@ -30,8 +30,7 @@ public class ParkingBoy {
         if (parkingLot == null) {
             throw new ParkingLotFullException();
         }
-        parkingLot.park(car);
-        return new ParkingTicket(car);
+        return parkingLot.park(car);
     }
 
     private ParkingLot findParkingLotOf(Car car) {
@@ -53,12 +52,15 @@ public class ParkingBoy {
         if (parkingTicket == null) {
             throw new MissingParkingTicketException();
         }
-        Car car = parkingTicket.getCar();
-        ParkingLot parkingLot = findParkingLotOf(car);
-        if (parkingLot == null) {
-            throw new UnrecognizedParkingTicketException();
+
+        Car car;
+        for (ParkingLot parkingLot: parkingLotList) {
+            car = parkingLot.take(parkingTicket);
+            if (car != null) {
+                return car;
+            }
         }
-        parkingLot.take(car);
-        return car;
+
+        throw new UnrecognizedParkingTicketException();
     }
 }

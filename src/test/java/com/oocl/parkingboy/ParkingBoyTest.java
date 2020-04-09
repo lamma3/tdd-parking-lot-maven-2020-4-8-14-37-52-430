@@ -18,7 +18,7 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
         Car car = new Car();
         ParkingTicket parkingTicket = parkingBoy.park(car);
-        Assertions.assertEquals(car, parkingTicket.getCar());
+        Assertions.assertNotNull(parkingTicket);
     }
 
     @Test
@@ -41,8 +41,7 @@ public class ParkingBoyTest {
     @Test
     public void should_throw_exception_when_ticket_is_wrong() {
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
-        Car car = new Car();
-        ParkingTicket parkingTicket = new ParkingTicket(car);
+        ParkingTicket parkingTicket = new ParkingTicket();
         UnrecognizedParkingTicketException exception = Assertions.assertThrows(UnrecognizedParkingTicketException.class,
                 () -> parkingBoy.fetch(parkingTicket));
         Assertions.assertEquals("Unrecognized parking ticket.", exception.getMessage());
