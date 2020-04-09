@@ -1,9 +1,11 @@
-package com.oocl;
+package com.oocl.parkingboy;
 
+import com.oocl.Car;
+import com.oocl.ParkingLot;
+import com.oocl.ParkingTicket;
 import com.oocl.exception.MissingParkingTicketException;
 import com.oocl.exception.ParkingLotFullException;
 import com.oocl.exception.UnrecognizedParkingTicketException;
-import com.oocl.parkingboy.ParkingBoy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

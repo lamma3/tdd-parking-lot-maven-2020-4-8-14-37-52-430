@@ -1,7 +1,7 @@
-package com.oocl;
+package com.oocl.parkingboy;
 
-import com.oocl.parkingboy.ParkingBoy;
-import com.oocl.parkingboy.SmartParkingBoy;
+import com.oocl.Car;
+import com.oocl.ParkingLot;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
