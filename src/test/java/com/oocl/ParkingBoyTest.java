@@ -66,4 +66,16 @@ public class ParkingBoyTest {
         ParkingTicket parkingTicket = packingBoy.park(car);
         Assert.assertNull(parkingTicket);
     }
+
+    @Test
+    public void should_return_null_when_car_already_parked() {
+        ParkingLot parkingLot = Mockito.mock(ParkingLot.class);
+        Mockito.when(parkingLot.contains(Mockito.any()))
+                .thenReturn(true);
+
+        ParkingBoy packingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+        ParkingTicket parkingTicket = packingBoy.park(car);
+        Assert.assertNull(parkingTicket);
+    }
 }
