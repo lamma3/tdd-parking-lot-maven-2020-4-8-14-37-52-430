@@ -11,11 +11,15 @@ public class SuperSmartParkingBoy extends ParkingBoy {
     }
 
     @Override
-    ParkingLot findAvailableParkingLot() {
+    ParkingLot findGoodParkingLot() {
         // return first parking lot witch is not full and with the highest available rate
         return this.getParkingLotList().stream()
-                .filter(parkingLot -> parkingLot.getAvailableRate() > 0)
-                .max(Comparator.comparing(ParkingLot::getAvailableRate))
+                .filter(this::isAvailable)
+                .max(Comparator.comparing(this::calculateAvailableRate))
                 .orElse(null);
+    }
+
+    private double calculateAvailableRate(ParkingLot parkingLot) {
+        return (double) parkingLot.getEmptyPosition() / parkingLot.getCapacity();
     }
 }

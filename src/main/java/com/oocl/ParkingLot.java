@@ -31,11 +31,11 @@ public class ParkingLot {
         return parkingTicketCarMap.containsValue(car);
     }
 
-    public int getEmptyPosition() {
-        return capacity - parkingTicketCarMap.size();
+    public int getCapacity() {
+        return capacity;
     }
 
-    public double getAvailableRate() {
-        return (double) getEmptyPosition() / capacity;
+    public int getEmptyPosition() {
+        return capacity - parkingTicketCarMap.size();
     }
 }

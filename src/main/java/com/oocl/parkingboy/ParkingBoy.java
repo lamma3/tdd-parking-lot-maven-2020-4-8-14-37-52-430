@@ -26,7 +26,7 @@ public class ParkingBoy {
         if (findParkingLotOf(car) != null) {
             return null;
         }
-        ParkingLot parkingLot = findAvailableParkingLot();
+        ParkingLot parkingLot = findGoodParkingLot();
         if (parkingLot == null) {
             throw new ParkingLotFullException();
         }
@@ -40,12 +40,16 @@ public class ParkingBoy {
                 .orElse(null);
     }
 
-    ParkingLot findAvailableParkingLot() {
+    ParkingLot findGoodParkingLot() {
         // return first parking lot which is not full
         return parkingLotList.stream()
-                .filter(parkingLot -> parkingLot.getAvailableRate() > 0)
+                .filter(this::isAvailable)
                 .findFirst()
                 .orElse(null);
+    }
+
+    boolean isAvailable(ParkingLot parkingLot) {
+        return parkingLot.getEmptyPosition() > 0;
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
