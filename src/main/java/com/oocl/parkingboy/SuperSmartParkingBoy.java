@@ -14,12 +14,12 @@ public class SuperSmartParkingBoy extends ParkingBoy {
     ParkingLot findGoodParkingLot() {
         // return first parking lot witch is not full and with the highest available rate
         return this.getParkingLotList().stream()
-                .filter(this::isAvailable)
+                .filter(parkingLot -> calculateEmptyPosition(parkingLot) > 0)
                 .max(Comparator.comparing(this::calculateAvailableRate))
                 .orElse(null);
     }
 
     private double calculateAvailableRate(ParkingLot parkingLot) {
-        return (double) parkingLot.getEmptyPosition() / parkingLot.getCapacity();
+        return (double) calculateEmptyPosition(parkingLot) / parkingLot.getCapacity();
     }
 }

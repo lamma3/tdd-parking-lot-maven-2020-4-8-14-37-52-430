@@ -43,13 +43,13 @@ public class ParkingBoy {
     ParkingLot findGoodParkingLot() {
         // return first parking lot which is not full
         return parkingLotList.stream()
-                .filter(this::isAvailable)
+                .filter(parkingLot -> calculateEmptyPosition(parkingLot) > 0)
                 .findFirst()
                 .orElse(null);
     }
 
-    boolean isAvailable(ParkingLot parkingLot) {
-        return parkingLot.getEmptyPosition() > 0;
+    int calculateEmptyPosition(ParkingLot parkingLot) {
+        return parkingLot.getCapacity() - parkingLot.getOccupied();
     }
 
     public Car fetch(ParkingTicket parkingTicket) {

@@ -8,6 +8,7 @@ import com.oocl.exception.ParkingLotFullException;
 import com.oocl.exception.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class ParkingBoyTest {
 
@@ -82,15 +83,24 @@ public class ParkingBoyTest {
 
     @Test
     public void should_park_to_parking_lot_2_when_parking_lot_1_is_full() {
-        ParkingLot parkingLot1 = new ParkingLot(1);
-        ParkingLot parkingLot2 = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot1, parkingLot2);
-        Car car1 = new Car();
-        parkingBoy.park(car1);
-        Car car2 = new Car();
-        parkingBoy.park(car2);
+        ParkingLot parkingLot1 = Mockito.mock(ParkingLot.class);
+        Mockito.when(parkingLot1.getCapacity()).thenReturn(1);
+        Mockito.when(parkingLot1.getOccupied()).thenReturn(1);
 
-        Assertions.assertFalse(parkingLot1.contains(car2));
-        Assertions.assertTrue(parkingLot2.contains(car2));
+        ParkingLot parkingLot2 = Mockito.mock(ParkingLot.class);
+        Mockito.when(parkingLot2.getCapacity()).thenReturn(1);
+        Mockito.when(parkingLot2.getOccupied()).thenReturn(0);
+
+        ParkingLot parkingLot3 = Mockito.mock(ParkingLot.class);
+        Mockito.when(parkingLot3.getCapacity()).thenReturn(10);
+        Mockito.when(parkingLot3.getOccupied()).thenReturn(0);
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot1, parkingLot2, parkingLot3);
+        Car car = new Car();
+        parkingBoy.park(car);
+
+        Mockito.verify(parkingLot1, Mockito.never()).park(car);
+        Mockito.verify(parkingLot2).park(car);
+        Mockito.verify(parkingLot3, Mockito.never()).park(car);
     }
 }
