@@ -12,8 +12,6 @@ import org.mockito.Mockito;
 
 public class ParkingBoyTest {
 
-    private static final int PARKING_LOT_CAPACITY = 10;
-
     @Test
     public void should_return_ticket_when_park_car() {
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
@@ -61,14 +59,14 @@ public class ParkingBoyTest {
 
     @Test
     public void should_throw_exception_when_car_park_full() {
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot(1));
-        for (int i = 0; i < PARKING_LOT_CAPACITY; i++) {
-            Car car = new Car();
-            parkingBoy.park(car);
-        }
-        Car car = new Car();
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car1 = new Car();
+        parkingBoy.park(car1);
+
+        Car car2 = new Car();
         ParkingLotFullException exception = Assertions.assertThrows(ParkingLotFullException.class,
-                () -> parkingBoy.park(car));
+                () -> parkingBoy.park(car2));
         Assertions.assertEquals("Not enough position.", exception.getMessage());
     }
 
