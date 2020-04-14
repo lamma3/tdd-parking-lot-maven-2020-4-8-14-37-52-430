@@ -14,7 +14,7 @@ public class SuperSmartParkingBoy extends ParkingBoy {
     protected ParkingLot findGoodParkingLot() {
         // return first parking lot witch is not full and with the highest available rate
         return this.parkingLotList.stream()
-                .filter(parkingLot -> calculateEmptyPosition(parkingLot) > 0)
+                .filter(this::isAvailable)
                 .max(Comparator.comparing(this::calculateAvailableRate))
                 .orElse(null);
     }
