@@ -11,9 +11,9 @@ public class SmartParkingBoy extends ParkingBoy {
     }
 
     @Override
-    ParkingLot findGoodParkingLot() {
+    protected ParkingLot findGoodParkingLot() {
         // return first parking lot witch is not full and with the largest number of empty space
-        return this.getParkingLotList().stream()
+        return this.parkingLotList.stream()
                 .filter(parkingLot -> calculateEmptyPosition(parkingLot) > 0)
                 .max(Comparator.comparing(this::calculateEmptyPosition))
                 .orElse(null);

@@ -12,14 +12,10 @@ import java.util.List;
 
 public class ParkingBoy {
 
-    private List<ParkingLot> parkingLotList;
+    protected List<ParkingLot> parkingLotList;
 
     public ParkingBoy(ParkingLot... parkingLotArray) {
         this.parkingLotList = Arrays.asList(parkingLotArray);
-    }
-
-    List<ParkingLot> getParkingLotList() {
-        return parkingLotList;
     }
 
     public ParkingTicket park(Car car) {
@@ -40,7 +36,7 @@ public class ParkingBoy {
                 .orElse(null);
     }
 
-    ParkingLot findGoodParkingLot() {
+    protected ParkingLot findGoodParkingLot() {
         // return first parking lot which is not full
         return parkingLotList.stream()
                 .filter(parkingLot -> calculateEmptyPosition(parkingLot) > 0)
