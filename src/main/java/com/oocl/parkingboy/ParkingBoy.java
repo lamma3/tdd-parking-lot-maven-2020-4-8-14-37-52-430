@@ -6,23 +6,30 @@ import com.oocl.ParkingTicket;
 import com.oocl.exception.MissingParkingTicketException;
 import com.oocl.exception.ParkingLotFullException;
 import com.oocl.exception.UnrecognizedParkingTicketException;
+import com.oocl.parkingboy.findParkingLotStrategy.FindParkingLotStrategy;
+import com.oocl.parkingboy.findParkingLotStrategy.FirstAvailableStrategy;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class ParkingBoy {
 
-    protected List<ParkingLot> parkingLotList;
+    private final static FindParkingLotStrategy FIND_PARKING_LOT_STRATEGY = new FirstAvailableStrategy();
+    private List<ParkingLot> parkingLotList;
 
     public ParkingBoy(ParkingLot... parkingLotArray) {
         this.parkingLotList = Arrays.asList(parkingLotArray);
+    }
+
+    protected FindParkingLotStrategy getFindParkingLotStrategy() {
+        return FIND_PARKING_LOT_STRATEGY;
     }
 
     public ParkingTicket park(Car car) {
         if (findParkingLotOf(car) != null) {
             return null;
         }
-        ParkingLot parkingLot = findGoodParkingLot();
+        ParkingLot parkingLot = getFindParkingLotStrategy().find(parkingLotList);
         if (parkingLot == null) {
             throw new ParkingLotFullException();
         }
@@ -34,22 +41,6 @@ public class ParkingBoy {
                 .filter(parkingLot -> parkingLot.contains(car))
                 .findAny()
                 .orElse(null);
-    }
-
-    protected ParkingLot findGoodParkingLot() {
-        // return first parking lot which is not full
-        return parkingLotList.stream()
-                .filter(this::isAvailable)
-                .findFirst()
-                .orElse(null);
-    }
-
-    protected boolean isAvailable(ParkingLot parkingLot) {
-        return calculateEmptyPosition(parkingLot) > 0;
-    }
-
-    int calculateEmptyPosition(ParkingLot parkingLot) {
-        return parkingLot.getCapacity() - parkingLot.getOccupied();
     }
 
     public Car fetch(ParkingTicket parkingTicket) {

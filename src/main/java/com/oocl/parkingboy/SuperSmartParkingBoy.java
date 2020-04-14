@@ -1,25 +1,19 @@
 package com.oocl.parkingboy;
 
 import com.oocl.ParkingLot;
-
-import java.util.Comparator;
+import com.oocl.parkingboy.findParkingLotStrategy.FindParkingLotStrategy;
+import com.oocl.parkingboy.findParkingLotStrategy.LargestAvailableRateStrategy;
 
 public class SuperSmartParkingBoy extends ParkingBoy {
+
+    private final static FindParkingLotStrategy FIND_PARKING_LOT_STRATEGY = new LargestAvailableRateStrategy();
 
     public SuperSmartParkingBoy(ParkingLot... parkingLotArray) {
         super(parkingLotArray);
     }
 
     @Override
-    protected ParkingLot findGoodParkingLot() {
-        // return first parking lot witch is not full and with the highest available rate
-        return this.parkingLotList.stream()
-                .filter(this::isAvailable)
-                .max(Comparator.comparing(this::calculateAvailableRate))
-                .orElse(null);
-    }
-
-    private double calculateAvailableRate(ParkingLot parkingLot) {
-        return (double) calculateEmptyPosition(parkingLot) / parkingLot.getCapacity();
+    protected FindParkingLotStrategy getFindParkingLotStrategy() {
+        return FIND_PARKING_LOT_STRATEGY;
     }
 }
