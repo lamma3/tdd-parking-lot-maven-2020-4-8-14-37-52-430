@@ -61,7 +61,7 @@ public class ParkingBoyTest {
 
     @Test
     public void should_throw_exception_when_car_park_full() {
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot(1));
         for (int i = 0; i < PARKING_LOT_CAPACITY; i++) {
             Car car = new Car();
             parkingBoy.park(car);
