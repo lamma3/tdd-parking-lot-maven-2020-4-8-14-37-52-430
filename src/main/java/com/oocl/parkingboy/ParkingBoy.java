@@ -14,22 +14,18 @@ import java.util.List;
 
 public class ParkingBoy {
 
-    private final static FindParkingLotStrategy FIND_PARKING_LOT_STRATEGY = new FirstAvailableStrategy();
+    protected FindParkingLotStrategy findParkingLotStrategy = new FirstAvailableStrategy();
     private List<ParkingLot> parkingLotList;
 
     public ParkingBoy(ParkingLot... parkingLotArray) {
         this.parkingLotList = Arrays.asList(parkingLotArray);
     }
 
-    protected FindParkingLotStrategy getFindParkingLotStrategy() {
-        return FIND_PARKING_LOT_STRATEGY;
-    }
-
     public ParkingTicket park(Car car) {
         if (findParkingLotOf(car) != null) {
             return null;
         }
-        ParkingLot parkingLot = getFindParkingLotStrategy().find(parkingLotList);
+        ParkingLot parkingLot = findParkingLotStrategy.find(parkingLotList);
         if (parkingLot == null) {
             throw new ParkingLotFullException();
         }
